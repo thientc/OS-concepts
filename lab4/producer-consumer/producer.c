@@ -37,7 +37,8 @@ int main() {
 
     srand(time(NULL));
 
-    for (int i = 0; i < 10; i++) {
+    while(1){
+	    //for (int i = 0; i < 10; i++) {
         int item = rand() % 100;
 
         sem_wait(sem_empty);
@@ -50,7 +51,7 @@ int main() {
         sem_post(sem_mutex);
         sem_post(sem_full);
 
-        sleep(1);
+        usleep(100000);
     }
 
     munmap(shm_ptr, sizeof(shared_data));

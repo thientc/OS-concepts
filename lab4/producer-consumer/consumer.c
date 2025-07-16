@@ -30,7 +30,8 @@ int main() {
     shm_fd = shm_open(SHM_NAME, O_RDWR, 0666);
     shm_ptr = mmap(0, sizeof(shared_data), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
-    for (int i = 0; i < 10; i++) {
+    while(1){
+	    //for (int i = 0; i < 10; i++) {
         sem_wait(sem_full);
         sem_wait(sem_mutex);
 
@@ -41,7 +42,7 @@ int main() {
         sem_post(sem_mutex);
         sem_post(sem_empty);
 
-        sleep(2);
+        usleep(500000);
     }
 
     munmap(shm_ptr, sizeof(shared_data));
